@@ -4,6 +4,7 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const cloudinary = require("cloudinary").v2;
+const cors = require("cors");
 
 mongoose.connect(process.env.MONGODB_URI);
 
@@ -16,6 +17,7 @@ cloudinary.config({
 const userRoutes = require("./routes/user");
 const offerRoutes = require("./routes/offer");
 
+app.use(cors());
 app.use(express.json());
 app.use(userRoutes);
 app.use(offerRoutes);
