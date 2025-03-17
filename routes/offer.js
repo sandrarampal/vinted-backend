@@ -162,11 +162,11 @@ router.get("/offers", async (req, res) => {
       filters.product_price = { $lte: Number(priceMax) };
     }
     if (priceMin) {
-      if (filters.product_price) {
-        filters.product_price.$lte = Number(priceMax);
-      } else {
-        filters.product_price = { $gte: Number(priceMin) };
-      }
+      // if (filters.product_price) {
+      //   filters.product_price.$lte = Number(priceMax);
+      // } else {
+      filters.product_price = { $gte: Number(priceMin) };
+      // }
     }
 
     const sorting = {};
