@@ -204,7 +204,7 @@ router.get("/offers", async (req, res) => {
       .limit(limit);
     const offersLength = await Offer.countDocuments(filters); //permet de compter les offres correspondant aux filtres.
 
-    const filteredOffers = [{ count: offersLength, offers: offers }];
+    const filteredOffers = { count: offersLength, offers: offers };
     res.status(200).json(filteredOffers);
   } catch (error) {
     res.status(500).json({ message: error.message });
