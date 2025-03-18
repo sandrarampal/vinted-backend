@@ -14,6 +14,7 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
+const paymentRoutes = require("./routes/payment");
 const userRoutes = require("./routes/user");
 const offerRoutes = require("./routes/offer");
 
@@ -21,6 +22,7 @@ app.use(cors());
 app.use(express.json());
 app.use(userRoutes);
 app.use(offerRoutes);
+app.use(paymentRoutes);
 
 app.all("*", (req, res) => {
   res.status(404).json({ message: "This route does not exist" });
