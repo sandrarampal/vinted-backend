@@ -194,7 +194,7 @@ router.get("/offers", async (req, res) => {
     } else {
       pageToShow = 0;
     }
-    let limit = 5;
+    let limit = 15;
     //console.log(filters);
     const offers = await Offer.find(filters)
       .populate("owner", "account")
