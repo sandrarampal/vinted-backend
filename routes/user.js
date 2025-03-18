@@ -48,23 +48,40 @@ router.post("/user/signup", fileUpload(), async (req, res) => {
     const hash = SHA256(passwordSalt).toString(encBase64);
     //console.log(hash);
 
-    const convertedPicture = convertToBase64(req.files.avatar);
+    if (req.files) {
+      const convertedPicture = convertToBase64(req.files.avatar);
 
-    const cloudinaryResponse = await cloudinary.uploader.upload(
-      convertedPicture
-    );
+      const cloudinaryResponse = await cloudinary.uploader.upload(
+        convertedPicture
+      );
 
-    const newUser = new User({
-      email: req.body.email,
-      account: {
-        username: req.body.username,
-        avatar: cloudinaryResponse,
-      },
-      newsletter: req.body.newsletter,
-      token: token,
-      hash: hash,
-      salt: salt,
-    });
+      const newUser = new User({
+        email: req.body.email,
+        account: {
+          username: req.body.username,
+          avatar: cloudinaryResponse,
+        },
+        newsletter: req.body.newsletter,
+        token: token,
+        hash: hash,
+        salt: salt,
+      });
+    } else {
+      newUser = new User({
+        email: req.body.email,
+        account: {
+          username: req.body.username,
+          avatar: {
+            secure_url:
+              "https://res.cloudinary.com/dooopjthm/image/upload/w_1000,c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1742245508/osv1euotqzzvruwxmrss.webp",
+          },
+        },
+        newsletter: req.body.newsletter,
+        token: token,
+        hash: hash,
+        salt: salt,
+      });
+    }
 
     await newUser.save();
 

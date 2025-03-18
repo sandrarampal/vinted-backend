@@ -10,6 +10,7 @@ router.use(cors());
 router.post("/payment", async (req, res) => {
   try {
     // On crée une intention de paiement
+    console.log(req.body);
 
     const paymentIntent = await stripe.paymentIntents.create({
       // Montant de la transaction
@@ -17,8 +18,10 @@ router.post("/payment", async (req, res) => {
       // Devise de la transaction
       currency: "eur",
       // Description du produit
-      title: req.body.title,
+      description: req.body.title,
     });
+    // console.log(paymentIntent);
+
     // On renvoie les informations de l'intention de paiement au client
     res.json(paymentIntent);
   } catch (error) {
