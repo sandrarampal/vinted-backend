@@ -3,9 +3,12 @@ const express = require("express");
 const fileUpload = require("express-fileupload");
 const cloudinary = require("cloudinary").v2;
 const router = express.Router();
+const cors = require("cors");
 
 const Offer = require("../models/Offer");
 const User = require("../models/User");
+
+router.use(cors());
 
 const isAuthenticated = require("../middlewares/isAuthenticated");
 

@@ -2,6 +2,9 @@ const express = require("express");
 const fileUpload = require("express-fileupload");
 const cloudinary = require("cloudinary").v2;
 const router = express.Router();
+const cors = require("cors");
+
+router.use(cors());
 
 cloudinary.config({
   cloud_name: "dooopjthm",
