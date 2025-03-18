@@ -61,7 +61,7 @@ router.post(
       });
       //console.log(newOffer);
       await newOffer.save();
-      const offerCreated = await Offer.find(newOffer).populate(
+      const offerCreated = await Offer.findOne(newOffer).populate(
         "owner",
         "account"
       );
